@@ -1,1 +1,14 @@
-Rather than creating an entirely new data structure for parsing the previously used words. I simply added an extra field to the DLBTrie for word priority. Whenever a user completes a word it increments the priority value of that word by 1 inside the dictionary Trie. So when generating predictions it will prioritize showing words with the highest priority values in the dictionary Trie first. To make it easier to map a word with a given priority outside of the DLBTrie when saving to a file, I created a Pair object that turns each word into a symbol and then associates a priority value based on the number of times the user completed that word previously. I decided to use a LinkedList of Pair objects in order to keep track of the words that needed to be saved to the user_history.txt file, which I sorted with the compareTo method I added in Pair.java so that it will write the words to the file with highest priority (most commonly used) words at the top of the file/first and the lowest priority (least commonly used) at the bottom/last. The benefit of using the LinkedList for this is O(1) when adding and O(n) when searching. When reading the LinkedList, every value must be copied to the dictionary DLBTrie anyways so it is only O(n) 1 time per run of the program.
+Rather than creating an entirely new data structure for parsing the previously used words. 
+I simply added an extra field to the DLBTrie for word priority. Whenever a user completes 
+a word it increments the priority value of that word by 1 inside the dictionary Trie. So when
+generating predictions it will prioritize showing words with the highest priority values in 
+the dictionary Trie first. To make it easier to map a word with a given priority outside of 
+the DLBTrie when saving to a file, I created a Pair object that turns each word into a symbol 
+and then associates a priority value based on the number of times the user completed that word 
+previously. I decided to use a LinkedList of Pair objects in order to keep track of the words 
+that needed to be saved to the user_history.txt file, which I sorted with the compareTo method 
+I added in Pair.java so that it will write the words to the file with highest priority (most commonly used)
+words at the top of the file/first and the lowest priority (least commonly used) at the bottom/last. 
+The benefit of using the LinkedList for this is O(1) when adding and O(n) when searching. When 
+reading the LinkedList, every value must be copied to the dictionary DLBTrie anyways so it is only 
+O(n) 1 time per run of the program.
